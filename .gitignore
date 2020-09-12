@@ -1,0 +1,12 @@
+.DS_Store
+obj
+*.o
+*.d
+CMakeLists.txt
+*.pickle
+cmake-build-debug
+.idea
+.doxygen
+generator-docker
+Lem_in
+

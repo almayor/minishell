@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:16:04 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 22:22:25 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 16:36:15 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	environ_append(const char *s)
 	g_environ = env;
 }
 
-int	ft_setenv(const char *name, const char *value, int overwrite)
+int			ft_setenv(const char *name, const char *value, int overwrite)
 {
 	size_t	i;
 

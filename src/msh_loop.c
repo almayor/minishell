@@ -6,13 +6,13 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 19:23:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 03:05:22 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 16:28:22 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_tokens(char **tokens)
+static void		free_tokens(char **tokens)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ static void	free_tokens(char **tokens)
 	free(tokens);
 }
 
-static size_t count_tokens(const char *s)
+static size_t	count_tokens(const char *s)
 {
 	size_t count;
 	size_t i;
@@ -38,11 +38,11 @@ static size_t count_tokens(const char *s)
 	return (count);
 }
 
-static char	**tokenize(char *line)
+static char		**tokenize(char *line)
 {
 	char	**tokens;
 	char	*token;
-	char 	*ptr;
+	char	*ptr;
 	size_t	position;
 
 	tokens = ft_xcalloc(sizeof(char *), count_tokens(line) + 1);
@@ -57,11 +57,11 @@ static char	**tokenize(char *line)
 	return (tokens);
 }
 
-void		msh_loop(void)
+void			msh_loop(void)
 {
 	char	*line;
-	char 	*ptr;
-	char 	*cmd;
+	char	*ptr;
+	char	*cmd;
 	char	**argv;
 	int		status;
 
@@ -69,7 +69,7 @@ void		msh_loop(void)
 	rl_bind_key('\t', rl_complete);
 	while (status && (line = readline(MSH_PROMPT)))
 	{
-		add_history (line);
+		add_history(line);
 		cmd = ft_strtok_r(line, ";", &ptr);
 		while (cmd)
 		{

@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:59:33 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 14:14:35 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 16:37:30 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	check_directory(const char *dir)
 	return (1);
 }
 
-int 		msh_cd(char *const *argv)
+int			msh_cd(char *const *argv)
 {
-	char 	*pwd;
+	char	*pwd;
 	char	*dir;
 
 	dir = argv[1] ? argv[1] : ft_getenv("HOME");
@@ -40,7 +40,8 @@ int 		msh_cd(char *const *argv)
 	else if (chdir(dir))
 		ft_error("cd: unknown error");
 	else
-	{	pwd = getcwd(NULL, 0);
+	{
+		pwd = getcwd(NULL, 0);
 		ft_setenv("OLDPWD", ft_getenv("PWD"), 1);
 		ft_setenv("PWD", pwd, 1);
 	}

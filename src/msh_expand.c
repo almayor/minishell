@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:46:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 16:10:02 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 16:35:00 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*expand_parameters(const char *s)
 	return (ft_strdup(buf));
 }
 
-char	*msh_expand(const char *s)
+char		*msh_expand(const char *s)
 {
 	char	*s_expanded;
 

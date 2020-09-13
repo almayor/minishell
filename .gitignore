@@ -8,5 +8,5 @@ cmake-build-debug
 .idea
 .doxygen
 generator-docker
-Lem_in
+minishell
 

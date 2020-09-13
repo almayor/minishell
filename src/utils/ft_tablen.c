@@ -6,13 +6,13 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 22:21:02 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 22:21:13 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 16:36:04 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t ft_tablen(char *const *tab)
+size_t	ft_tablen(char *const *tab)
 {
 	size_t count;
 	size_t i;

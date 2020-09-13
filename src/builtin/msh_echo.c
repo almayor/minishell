@@ -6,13 +6,13 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 20:31:03 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 20:35:34 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 16:37:58 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int 		msh_echo(char *const *argv)
+int		msh_echo(char *const *argv)
 {
 	size_t i;
 

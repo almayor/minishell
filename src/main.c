@@ -6,13 +6,14 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 01:04:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 18:19:50 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 23:03:13 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char	**g_environ;
+int		g_pid;
 
 static void	copy_to_environ(char *const *envp)
 {
@@ -38,14 +39,26 @@ static void	free_environ(void)
 	free(g_environ);
 }
 
-static void	handle_nothing(int sig)
+static void	handle_sigint(int sig)
 {
-	ft_printf("Use \"exit\" to leave the shell\n" MSH_PROMPT);
+	if (g_pid)
+		kill(g_pid, sig);
+	else
+		ft_printf("\n%s", MSH_PROMPT);
+}
+
+static void	handle_sigterm(int sig)
+{
+	if (g_pid)
+		kill(g_pid, sig);
+	signal(sig, SIG_DFL);
+	raise(sig);
 }
 
 int			main(int argc, char *const *argv, char *const *envp)
 {
-	if (signal(SIGINT, &handle_nothing))
+	if (signal(SIGINT, &handle_sigint) ||
+		signal(SIGTERM, &handle_sigterm))
 		ft_terminate(MSH_ERR_SIGHNDL, 2);
 	copy_to_environ(envp);
 	msh_loop();

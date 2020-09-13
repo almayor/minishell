@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 21:09:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 18:09:08 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 23:57:32 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 # define MINISHELL_H
 
 # include <limits.h>
-# include <readline/readline.h>
-# include <readline/history.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -26,10 +24,11 @@
 # include <unistd.h>
 
 # include "libftprintfgnl.h"
+# include "ansi.h"
 
 # define MSH_NAME			"msh"
 # define MSH_TOK_DELIM		" \t\r\n\a"
-# define MSH_BUFSIZE		4096
+# define MSH_TOK_BUFSIZE	4096
 # define MSH_PROMPT			"$> "
 
 # define MSH_ERR_MALLOC		"malloc error"
@@ -40,6 +39,7 @@
 # define MSH_ERR_SIGHNDL	"failed to set a signal handler"
 
 extern char	**g_environ;
+extern int	g_pid;
 
 /*
 ** driver functions

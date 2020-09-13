@@ -15,14 +15,9 @@
 static char	*get_string(const char *name, const char *value)
 {
 	char	*s;
-	size_t	len;
 
-	len = ft_strlen(name) + (value ? ft_strlen(value) : 0) + 1;
-	s = ft_xmalloc(sizeof(char) * (len + 1));
-	ft_strlcat(s, name, len + 1);
-	ft_strlcat(s, "=", len + 1);
-	if (value)
-		ft_strlcat(s, value, len + 1);
+	if (ft_asprintf(&s, "%s=%s", name, value) < 0)
+		ft_terminate(MSH_ERR_MALLOC, 2);
 	return (s);
 }
 

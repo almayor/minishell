@@ -6,11 +6,13 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 00:41:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 16:34:07 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 23:23:59 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int			g_gid;
 
 static char	*g_builtin_name[] = {
 	"cd",
@@ -37,56 +39,49 @@ static int	msh_num_builtins(void)
 
 static char	*join_path(const char *dir, const char *file, char *buf)
 {
-	char	*f;
+	size_t	dir_len;
 
-	if ((f = ft_strrchr(file, '/')))
-		file = f + 1;
-	ft_strlcpy(buf, dir, PATH_MAX);
-	if (buf[ft_strlen(dir)] != '/')
+	dir_len = ft_strlcpy(buf, dir, PATH_MAX);
+	if (buf[dir_len] != '/')
 		ft_strlcat(buf, "/", PATH_MAX);
 	ft_strlcat(buf, file, PATH_MAX);
 	return (buf);
 }
 
-static int	locate_exec(const char *name, char **exec)
+static char	*locate_exec(const char *name, char *buf)
 {
-	char	*pathenv;
-	char	*path;
-	int		found;
+	char		*dir;
 
-	*exec = ft_xmalloc(sizeof(char) * PATH_MAX);
-	if (access(name, F_OK) == 0)
+	if (*name == '/' && access(name, F_OK) == 0)
+		return (ft_strcpy(buf, name));
+	else if (access(name, F_OK) == 0)
 	{
-		join_path(getcwd(*exec, PATH_MAX), name, *exec);
-		return (1);
+		getcwd(buf, PATH_MAX);
+		ft_strlcat(buf, "/", PATH_MAX);
+		ft_strlcat(buf, name, PATH_MAX);
+		return (buf);
 	}
-	found = 0;
-	pathenv = ft_strdup(ft_getenv("PATH"));
-	path = ft_strtok(pathenv, ":");
-	while (path != NULL)
+	dir = ft_strtok(ft_getenv("PATH"), ":");
+	while (dir != NULL)
 	{
-		join_path(path, name, *exec);
-		if ((found = access(*exec, F_OK) == 0))
-			break ;
-		path = ft_strtok(NULL, ":");
+		join_path(dir, name, buf);
+		if (access(buf, F_OK) == 0)
+			return (buf);
+		dir = ft_strtok(NULL, ":");
 	}
-	free(pathenv);
-	if (!found)
-		free(*exec);
-	return (found);
+	return (NULL);
 }
 
 static int	msh_launch(char *const *argv)
 {
-	pid_t	pid;
-	char	*exec;
+	static char	exec[PATH_MAX];
 
-	pid = fork();
-	if (pid < 0)
+	g_pid = fork();
+	if (g_pid < 0)
 		ft_terminate(MSH_ERR_FORK, 1);
-	else if (pid == 0)
+	else if (g_pid == 0)
 	{
-		if (!locate_exec(argv[0], &exec))
+		if (!locate_exec(argv[0], exec))
 			ft_terminate(MSH_ERR_CMD, 1);
 		else if (access(exec, X_OK))
 			ft_terminate(MSH_ERR_PERM, 1);
@@ -95,6 +90,7 @@ static int	msh_launch(char *const *argv)
 	}
 	else
 		wait(NULL);
+	g_pid = 0;
 	return (1);
 }
 

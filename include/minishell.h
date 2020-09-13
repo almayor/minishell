@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 21:09:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 00:53:41 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 02:10:28 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # define MINISHELL_H
 
 # include <limits.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>

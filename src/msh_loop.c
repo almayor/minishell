@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 19:23:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 00:22:43 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 02:09:27 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ void			msh_loop(void)
 	int		status;
 
 	status = 1;
-	while (status && (line = msh_readline(msh_prompt())))
+	while (status && (line = readline(msh_prompt())))
 	{
+		add_history(line);
 		cmd = ft_strtok_r(line, ";", &ptr);
 		while (cmd)
 		{

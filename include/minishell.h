@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 21:09:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 03:05:27 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 18:09:08 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 # include "libftprintfgnl.h"
@@ -37,7 +39,7 @@
 # define MSH_ERR_CMD		"command not found"
 # define MSH_ERR_SIGHNDL	"failed to set a signal handler"
 
-char	**g_environ;
+extern char	**g_environ;
 
 /*
 ** driver functions

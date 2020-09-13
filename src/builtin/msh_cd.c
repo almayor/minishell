@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:59:33 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 16:37:30 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 18:12:47 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int			msh_cd(char *const *argv)
 		ft_setenv("OLDPWD", ft_getenv("PWD"), 1);
 		ft_setenv("PWD", pwd, 1);
 	}
+	free(pwd);
 	return (1);
 }

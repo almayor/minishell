@@ -14,7 +14,8 @@
 	* builtins: `cd`, `env`, `setenv`, `unsetenv`, `echo`, `exit`
 	* separation of commands with `;`
 	* history and autocompletion
-	* management of `SIGINT`
+	* management of `SIGINT` and `SIGTERM`
+	* an informative user prompt
 * Only the following functions are allowed
 	* `malloc`, `free`
 	* `access`

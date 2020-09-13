@@ -44,7 +44,7 @@ char	**g_environ;
 */
 
 int		msh_execute(char *const *argv);
-char	*msh_expand(char *s);
+char	*msh_expand(const char *s);
 void	msh_loop(void);
 
 /*

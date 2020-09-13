@@ -36,6 +36,11 @@ cd minishell
 git submodule --init --recursive
 make
 ```
+
+## Resources
+
+* <https://brennan.io/2015/01/16/write-a-shell-in-c/>
+
 ## Acknowledgements
 
 We are grateful to the entire team behind School 42 and its [Moscow branch](https://21-school.ru

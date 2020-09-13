@@ -6,7 +6,7 @@
 #    By: unite <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/05 18:17:42 by unite             #+#    #+#              #
-#    Updated: 2020/09/13 22:27:23 by unite            ###   ########.fr        #
+#    Updated: 2020/09/14 01:26:52 by unite            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ utils/ft_xmalloc.c \
 msh_execute.c \
 msh_expand.c \
 msh_loop.c \
+msh_prompt.c \
+msh_signal.c \
 main.c \
 
 ################################################################################
@@ -39,6 +41,7 @@ main.c \
 PATHS = src
 PATHO = obj
 PATHI = include libftprintfgnl
+PATHL = libftprintfgnl
 
 ################################################################################
 
@@ -70,8 +73,8 @@ OBJ = $(patsubst %.c, $(PATHO)/%.o, $(SRC_NAME))
 
 ################################################################################
 
-$(NAME) : $(OBJ)
-	$(LINK) $^ -o $@ $(LFLAGS)
+$(NAME) : $(OBJ) $(PATHL)/libftprintfgnl.a
+	$(LINK) $(OBJ) -o $@ $(LFLAGS)
 
 ################################################################################
 
@@ -98,11 +101,11 @@ fclean : clean
 
 clean :
 	$(RM) -rf $(PATHO)
-	$(MAKE) -C libftprintfgnl fclean
+	$(MAKE) -C $(PATHL) fclean
 
 re : fclean all
 
 libftprintfgnl :
-	$(MAKE) -C libftprintfgnl
+	$(MAKE) -C $(PATHL)
 
 ################################################################################

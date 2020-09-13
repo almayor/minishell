@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 01:04:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 23:03:13 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 00:51:54 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,26 +39,10 @@ static void	free_environ(void)
 	free(g_environ);
 }
 
-static void	handle_sigint(int sig)
-{
-	if (g_pid)
-		kill(g_pid, sig);
-	else
-		ft_printf("\n%s", MSH_PROMPT);
-}
-
-static void	handle_sigterm(int sig)
-{
-	if (g_pid)
-		kill(g_pid, sig);
-	signal(sig, SIG_DFL);
-	raise(sig);
-}
-
 int			main(int argc, char *const *argv, char *const *envp)
 {
-	if (signal(SIGINT, &handle_sigint) ||
-		signal(SIGTERM, &handle_sigterm))
+	if (signal(SIGINT, &handler_sigint) ||
+		signal(SIGTERM, &handler_sigterm))
 		ft_terminate(MSH_ERR_SIGHNDL, 2);
 	copy_to_environ(envp);
 	msh_loop();

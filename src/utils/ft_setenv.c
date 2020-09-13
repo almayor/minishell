@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:16:04 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 16:36:15 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 01:00:39 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static char	*get_string(const char *name, const char *value)
 	char	*s;
 
 	if (ft_asprintf(&s, "%s=%s", name, value) < 0)
-		ft_terminate(MSH_ERR_MALLOC, 2);
+		ft_terminate("bla", 2);
 	return (s);
 }
 
-static void	environ_append(const char *s)
+static void	environ_append(char *s)
 {
 	char	**env;
 	size_t	i;
@@ -33,7 +33,7 @@ static void	environ_append(const char *s)
 		env[i] = g_environ[i];
 		i++;
 	}
-	env[i] = ft_strdup(s);
+	env[i] = s;
 	free(g_environ);
 	g_environ = env;
 }

@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:59:33 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 00:04:44 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 14:14:35 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int 		msh_cd(char *const *argv)
 	char	*dir;
 
 	dir = argv[1] ? argv[1] : ft_getenv("HOME");
-	if (!dir || !*dir)
+	if (!dir)
 		ft_error("cd: HOME not set");
 	else if (check_directory(dir))
 		return (1);

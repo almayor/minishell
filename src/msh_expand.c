@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:46:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 21:14:23 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 14:12:58 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,32 @@ static size_t	count(const char *haystack, const char *needle)
 	return (count);
 }
 
-static char	*string_replace(const char *s, const char *needle, const char *repl)
+static void string_replace(char **s, const char *needle, const char *repl)
 {
-	size_t	count;
-	size_t	len_needle;
-	size_t	len_repl;
 	char	*s1;
-	char	*s2;
+	char	*p1;
+	char	*p_start;
+	char	*p_end;
 
-	count = string_count(s, needle);
-	len_needle = ft_strlen(needle);
-	len_repl = ft_strlen(repl);
-	s1 = ft_xmalloc(ft_strlen(s) + (len_repl - len_needle) * count(s, needle));
-	while ()
+	s1 = ft_xmalloc(
+		sizeof(char),
+		ft_strlen(*s) + 
+		(ft_strlen(repl) - ft_strlen(needle)) * count(*s, needle));
+	p1 = s1;
+	p_start = *s;
+	while ((p_end = ft_strstr(p_start, needle)))
+	{
+		ft_strncpy(p1, p_start, p_end - p_start);
+		p1 += p_end - p_start;
+		ft_strcpy(p1, repl);
+		p1 += ft_strlen(repl);
+		p_start = p_end + ft_strlen(needle);
+	}
+	ft_stcpy(p1, p_start);
+	free(*s);
+	*s = s1;
 }
+
 static char	*expand_tilde(char *s)
 {
 	char	*ptr;

@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 00:35:41 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 20:16:35 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 14:13:36 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*ft_getenv(const char *name)
 {
-	static char	*empty = "";
 	size_t		i;
 	size_t		len;
 
@@ -26,5 +25,5 @@ char	*ft_getenv(const char *name)
 			return (g_environ[i] + len + 1);
 		i++;
 	}
-	return (empty);
+	return (NULL);
 }

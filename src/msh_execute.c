@@ -83,15 +83,15 @@ static int  msh_launch(char *const *argv)
 
   pid = fork();
   if (pid < 0)
-    ft_terminate("failed to fork", 1);
+    ft_terminate(MSH_ERR_FORK, 1);
   else if (pid == 0)
   {
     if (!locate_exec(argv[0], &exec))
-      ft_terminate("command not found", 1);
+      ft_terminate(ft_asprintf("%s: %s", argv[0], MSH_ERR_CMD), 1);
     else if (access(exec, X_OK))
-      ft_terminate("permission denied", 1);
+      ft_terminate(ft_asprintf("%s: %s", argv[0], MSH_ERR_PERM), 1);
     else if (execve(exec, argv, g_environ))
-      ft_terminate("failed to execute", 1);
+      ft_terminate(ft_asprintf("%s: %s", argv[0], MSH_ERR_EXEC), 1);
   }
   else
     wait(NULL);

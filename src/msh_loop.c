@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+static void	free_tokens(char **tokens)
+{
+	size_t	i;
+
+	i = 0;
+	while (tokens[i])
+		free(tokens[i++]);
+	free(tokens);
+}
+
 static size_t count_tokens(const char *s)
 {
 	size_t count;
@@ -41,7 +51,7 @@ static char	**tokenize(char *line)
 	while (token != NULL)
 	{
 		if (ft_strlen(token) > 0)
-			tokens[position++] = token;
+			tokens[position++] = msh_expand(token);
 		token = ft_strtok_r(NULL, MSH_TOK_DELIM, &ptr);
 	}
 	return (tokens);
@@ -65,7 +75,7 @@ void		msh_loop(void)
 		{
 			argv = tokenize(cmd);
 			status = msh_execute(argv);
-			free(argv);
+			free_tokens(argv);
 			cmd = ft_strtok_r(NULL, ";", &ptr);
 		}
 		free(line);

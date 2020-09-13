@@ -12,54 +12,53 @@
 
 #include "minishell.h"
 
-static size_t	count(const char *haystack, const char *needle)
+static char	*extract_variable(const char *s)
 {
-	size_t	count;
+	size_t	i;
+	char	*var;
 
-	count = 0;
-	while ((haystack = ft_strstr(haystack, needle)))
-		count++;
-	return (count);
+	i = 0;
+	while (s[i] && s[i] != '_' && ft_isalnum(s[i]))
+		i++;
+	if (!(var = ft_strndup(s, i)))
+		ft_terminate(MSH_ERR_MALLOC, 2);
+	return (var);
 }
 
-static void string_replace(char **s, const char *needle, const char *repl)
+static char	*expand_parameters(const char *s)
 {
-	char	*s1;
-	char	*p1;
-	char	*p_start;
-	char	*p_end;
+	static char	buf[MSH_BUFSIZE];
+	char		*var;
+	char		*start;
+	char		*end;
 
-	s1 = ft_xmalloc(
-		sizeof(char),
-		ft_strlen(*s) + 
-		(ft_strlen(repl) - ft_strlen(needle)) * count(*s, needle));
-	p1 = s1;
-	p_start = *s;
-	while ((p_end = ft_strstr(p_start, needle)))
+	start = s;
+	end = ft_strchr(start, '$');
+	while ((end = ft_strchr(start, '$')))
 	{
-		ft_strncpy(p1, p_start, p_end - p_start);
-		p1 += p_end - p_start;
-		ft_strcpy(p1, repl);
-		p1 += ft_strlen(repl);
-		p_start = p_end + ft_strlen(needle);
+		ft_strncat(buf, start, end - start - 1);
+		var = extract_variable(end + 1);
+		ft_strcat(buf, ft_getenv(var) ? ft_getenv(var) : "");
+		start = end + 1 + ft_strlen(var);
+		free(var);
 	}
-	ft_stcpy(p1, p_start);
-	free(*s);
-	*s = s1;
+	ft_strcat(buf, start);
+	return (ft_strdup(buf));
 }
 
-static char	*expand_tilde(char *s)
+char	*msh_expand(const char *s)
 {
-	char	*ptr;
-	char	*s1;
+	char	*s_expanded;
 
-	ptr = ft_strchr(s, '~');
-	while (ptr)
-	{
-
-	}
-}
-char	*msh_expand(char *s)
-{
-
+	if (ft_strcmp(*s, "~") == 0)
+		s_expanded = ft_strdup(ft_getenv("HOME") ? ft_getenv("HOME") : "");
+	else if (ft_strcmp(*s, "~-") == 0)
+		s_expanded = ft_strdup(ft_getenv("OLDPWD") ? ft_getenv("OLDPWD") : "");
+	else if (ft_strcmp(*s, "~+") == 0)
+		s_expanded = ft_strdup(ft_getenv("PWD") ? ft_getenv("PWD") : "");
+	else
+		s_expanded = expand_parameters(s);
+	if (s_expanded == NULL)
+		ft_terminate(MSH_ERR_MALLOC, 2);
+	return (s_expanded);
 }

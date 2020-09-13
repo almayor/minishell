@@ -21,7 +21,7 @@ static void	copy_to_environ(char *const *envp)
 	while (envp[i])
 	{
 		if (!(g_environ[i] = ft_strdup(envp[i])))
-			ft_terminate("malloc error", 1);
+			ft_terminate(MSH_ERR_MALLOC, 1);
 		i++;
 	}
 }
@@ -34,7 +34,7 @@ static void	handle_nothing(int sig)
 int			main(int argc, char *const *argv, char *const *envp)
 {
 	if (signal(SIGINT, &handle_nothing))
-		ft_terminate("Error occured while setting a signal handler", 2);
+		ft_terminate(MSH_ERR_SIGHNDL, 2);
 	copy_to_environ(envp);
 	msh_loop();
 }

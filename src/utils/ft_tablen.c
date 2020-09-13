@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/04 23:24:43 by unite             #+#    #+#             */
-/*   Updated: 2020/07/16 02:51:17 by unite            ###   ########.fr       */
+/*   Created: 2020/09/12 22:21:02 by unite             #+#    #+#             */
+/*   Updated: 2020/09/12 22:21:13 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-/*
-** Replicates behaviour of `strchr` from `libc`.
-*/
-
-char	*ft_strchr(const char *s, int c)
+size_t ft_tablen(char *const *tab)
 {
-	size_t	i;
+	size_t count;
+	size_t i;
 
+	count = 0;
 	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return ((char *)(s + i));
-		i++;
-	}
-	if (c == 0)
-		return ((char *)(s + i));
-	else
-		return (NULL);
+	while (tab[i++])
+		count++;
+	return (count);
 }

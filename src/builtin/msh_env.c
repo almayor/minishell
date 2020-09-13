@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   msh_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 13:50:06 by unite             #+#    #+#             */
-/*   Updated: 2020/07/16 02:53:18 by unite            ###   ########.fr       */
+/*   Created: 2020/09/12 23:58:32 by unite             #+#    #+#             */
+/*   Updated: 2020/09/13 00:04:29 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
+#include "minishell.h"
 
-/*
-** Writes a string to the standard output.
-** @param s The string to output.
-*/
-
-void	ft_putstr(char const *s)
+int 	msh_env(char *const *argv)
 {
-	ft_putstr_fd(s, 1);
+	size_t	i;
+
+	i = 0;
+	while (g_environ[i])
+	{
+		ft_printf("%s\n", g_environ[i]);
+		i++;
+	}
+	return (1);
 }

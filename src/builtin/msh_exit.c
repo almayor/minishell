@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	msh_exit(char const *argv[])
+#include "minishell.h"
+
+int	msh_exit(char *const *argv)
 {
 	return (0);
 }

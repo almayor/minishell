@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
 char	*ft_getenv(const char *name)
 {
 	static char	*empty = "";
@@ -18,10 +20,10 @@ char	*ft_getenv(const char *name)
 
 	len = ft_strlen(name);
 	i = 0;
-	while (environ[i])
+	while (g_environ[i])
 	{
-		if (ft_strncmp(environ[i], name, len) == 0)
-			return (environ[i] + len + 2);
+		if (ft_strncmp(g_environ[i], name, len) == 0)
+			return (g_environ[i] + len + 1);
 		i++;
 	}
 	return (empty);

@@ -6,9 +6,11 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:16:04 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 04:36:41 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/12 22:22:25 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 static char	*get_string(const char *name, const char *value)
 {
@@ -19,7 +21,8 @@ static char	*get_string(const char *name, const char *value)
 	s = ft_xmalloc(sizeof(char) * len);
 	ft_strlcat(s, name, len);
 	ft_strlcat(s, "=", len);
-	ft_strlcat(s, value, len);
+	if (value)
+		ft_strlcat(s, value, len);
 	return (s);
 }
 
@@ -28,16 +31,16 @@ static void	environ_append(const char *s)
 	char	**env;
 	size_t	i;
 
-	env = ft_xcalloc(sizeof(char *), sizeof(environ) / sizeof(char *) + 1);
+	env = ft_xcalloc(sizeof(char *), ft_tablen(g_environ) + 2);
 	i = 0;
-	while (environ[i])
+	while (g_environ[i])
 	{
-		env[i] = environ[i];
+		env[i] = g_environ[i];
 		i++;
 	}
-	env[i] = s;
-	free(environ);
-	environ = env;
+	env[i] = ft_strdup(s);
+	free(g_environ);
+	g_environ = env;
 }
 
 int	ft_setenv(const char *name, const char *value, int overwrite)
@@ -45,14 +48,14 @@ int	ft_setenv(const char *name, const char *value, int overwrite)
 	size_t	i;
 
 	i = 0;
-	while (environ[i])
+	while (g_environ[i])
 	{
-		if (ft_strncmp(environ[i], name, ft_strlen(name)))
+		if (ft_strncmp(g_environ[i], name, ft_strlen(name)) == 0)
 		{
 			if (overwrite)
 			{
-				free(environ[i]);
-				environ[i] = get_string(name, value);
+				free(g_environ[i]);
+				g_environ[i] = get_string(name, value);
 			}
 			return (0);
 		}

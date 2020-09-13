@@ -6,55 +6,68 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 19:23:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 01:16:16 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/13 03:05:22 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*msh_read_line(void)
-{
-	char	*line;
+#include "minishell.h"
 
-	if (feof(stdin))
-		line = NULL;
-	else if (get_next_line(0, &line) < 0)
-		ft_terminate("couldn't read line", 0, EXIT_FAILURE);
-	return (line);
+static size_t count_tokens(const char *s)
+{
+	size_t count;
+	size_t i;
+
+	count = 1;
+	i = 0;
+	while (s[i])
+	{
+		if (ft_strchr(MSH_TOK_DELIM, s[i]))
+			count++;
+		i++;
+	}
+	return (count);
 }
 
-char	**msh_split_line(const char *line)
+static char	**tokenize(char *line)
 {
-	size_t	position;
-	size_t	ntokens;
 	char	**tokens;
 	char	*token;
+	char 	*ptr;
+	size_t	position;
 
+	tokens = ft_xcalloc(sizeof(char *), count_tokens(line) + 1);
+	token = ft_strtok_r(line, MSH_TOK_DELIM, &ptr);
 	position = 0;
-	ntokens = ft_strcount(line, MSH_TOK_DELIM);
-	tokens = ft_xcalloc(sizeof(char *), ntokens + 1);
-	token = ft_strtok(line, MSH_TOK_DELIM);
 	while (token != NULL)
 	{
-		tokens[position++] = token;
-		token = ft_strtok(NULL, MSH_TOK_DELIM);
+		if (ft_strlen(token) > 0)
+			tokens[position++] = token;
+		token = ft_strtok_r(NULL, MSH_TOK_DELIM, &ptr);
 	}
 	return (tokens);
 }
 
-void	msh_loop(void)
+void		msh_loop(void)
 {
 	char	*line;
-	char	**args;
+	char 	*ptr;
+	char 	*cmd;
+	char	**argv;
 	int		status;
 
 	status = 1;
-	while (status)
+	rl_bind_key('\t', rl_complete);
+	while (status && (line = readline(MSH_PROMPT)))
 	{
-		ft_putstr("$> ");
-		line = msh_read_line(&line);
-		args = msh_split_line(line);
-		status = msh_execute(args[0], args + 1);
-
+		add_history (line);
+		cmd = ft_strtok_r(line, ";", &ptr);
+		while (cmd)
+		{
+			argv = tokenize(cmd);
+			status = msh_execute(argv);
+			free(argv);
+			cmd = ft_strtok_r(NULL, ";", &ptr);
+		}
 		free(line);
-		free(args);
 	}
 }

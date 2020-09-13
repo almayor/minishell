@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int 		msh_echo(char const *argv[])
+#include "minishell.h"
+
+int 		msh_echo(char *const *argv)
 {
 	ft_printf("%s\n", argv[1] ? argv[1] : "");
 	return (1);

@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_xmalloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/19 19:33:19 by unite             #+#    #+#             */
-/*   Updated: 2020/07/16 02:41:56 by unite            ###   ########.fr       */
+/*   Created: 2020/09/07 21:38:47 by unite             #+#    #+#             */
+/*   Updated: 2020/09/12 21:19:09 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
 /*
-** Replicates behaviour of `strncmp` from `libc`.
+** Replicates behaviour of `malloc` from `libc`, but fails on
+** memory allocation errors.
 */
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	*ft_xmalloc(size_t size)
 {
-	unsigned char *s1u;
-	unsigned char *s2u;
+	void	*mem;
 
-	s1u = (unsigned char *)s1;
-	s2u = (unsigned char *)s2;
-	while ((*s1u || *s2u) && n-- > 0)
-	{
-		if (*s1u - *s2u)
-			return (*s1u - *s2u);
-		s1u++;
-		s2u++;
-	}
-	return (0);
+	mem = malloc(size);
+	if (!mem && !size)
+		ft_terminate("malloc error", 2);
+	return (mem);
 }

@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strtok_r.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 13:55:36 by unite             #+#    #+#             */
-/*   Updated: 2020/07/16 02:53:24 by unite            ###   ########.fr       */
+/*   Created: 2020/09/12 00:28:49 by unite             #+#    #+#             */
+/*   Updated: 2020/09/13 01:43:06 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <unistd.h>
+#include "minishell.h"
 
-/*
-** Writes a string to a file descriptor.
-** @param s The string to output.
-** @param fd The file descriptor.
-*/
-
-void	ft_putstr_fd(char const *s, int fd)
+char	*ft_strtok_r(char *str, const char *sep, char **lasts)
 {
-	write(fd, s, ft_strlen(s));
+	char		*current;
+	size_t		i;
+
+	if (str)
+		*lasts = str;
+	if (!*lasts || !**lasts)
+		return (NULL);
+	current = *lasts;
+	i = 0;
+	while (current[i])
+	{
+		if (ft_strchr(sep, current[i]))
+		{
+			current[i] = '\0';
+			*lasts = current + i + 1;
+			return (current);
+		}
+		i++;
+	}
+	*lasts = NULL;
+	return (current);
 }

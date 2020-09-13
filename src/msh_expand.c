@@ -6,14 +6,17 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:46:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 05:02:35 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/12 21:14:23 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 static size_t	count(const char *haystack, const char *needle)
 {
 	size_t	count;
 
+	count = 0;
 	while ((haystack = ft_strstr(haystack, needle)))
 		count++;
 	return (count);

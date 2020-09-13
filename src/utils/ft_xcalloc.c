@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_xcalloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/02 02:48:10 by unite             #+#    #+#             */
-/*   Updated: 2020/07/16 02:44:20 by unite            ###   ########.fr       */
+/*   Created: 2019/09/05 00:27:33 by unite             #+#    #+#             */
+/*   Updated: 2020/09/12 21:18:40 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
 /*
-** Replicates behaviour of `strlcpy` from `libc`.
+** Replicates behaviour of `calloc` from `libc`, but fails on
+** memory allocation errors.
 */
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t maxlen)
+void	*ft_xcalloc(size_t count, size_t size)
 {
-	size_t srclen;
+	void	*mem;
 
-	srclen = ft_strlen(src);
-	if (srclen + 1 < maxlen)
-	{
-		ft_memcpy(dst, src, srclen + 1);
-	}
-	else if (maxlen != 0)
-	{
-		ft_memcpy(dst, src, maxlen - 1);
-		dst[maxlen - 1] = '\0';
-	}
-	return (srclen);
+	mem = ft_calloc(count, size);
+	if (!mem && !size)
+		ft_terminate("malloc error", 2);
+	return (mem);
 }

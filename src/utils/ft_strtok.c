@@ -6,9 +6,11 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 00:28:49 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 00:34:56 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/12 22:44:39 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 char	*ft_strtok(char *str, const char *sep)
 {
@@ -18,6 +20,8 @@ char	*ft_strtok(char *str, const char *sep)
 
 	if (str)
 		previous = str;
+	if (!previous || !*previous)
+		return (NULL);
 	current = previous;
 	i = 0;
 	while (current[i])
@@ -30,5 +34,6 @@ char	*ft_strtok(char *str, const char *sep)
 		}
 		i++;
 	}
-	return (NULL);
+	previous = NULL;
+	return (current);
 }

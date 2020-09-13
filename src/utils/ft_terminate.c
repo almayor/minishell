@@ -6,12 +6,14 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 00:23:14 by unite             #+#    #+#             */
-/*   Updated: 2020/09/12 01:25:55 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/12 23:55:55 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_terminate(const char *mes, const char *exec, int rc)
+#include "minishell.h"
+
+void	ft_terminate(const char *mes, int rc)
 {
-	ft_error(mes, exec);
+	ft_error(mes);
 	exit(rc);
 }

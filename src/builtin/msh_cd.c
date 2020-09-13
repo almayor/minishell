@@ -33,7 +33,7 @@ int 		msh_cd(char *const *argv)
 	char	*dir;
 
 	dir = argv[1] ? argv[1] : ft_getenv("HOME");
-	if (!dir)
+	if (!dir || !*dir)
 		ft_error("cd: HOME not set");
 	else if (check_directory(dir))
 		return (1);

@@ -26,17 +26,14 @@ static void	copy_to_environ(char *const *envp)
 	}
 }
 
-static void	handle_sigint(int sig)
+static void	handle_nothing(int sig)
 {
-	ft_printf("\n:-) Minishell says goodbye :-)\n");
-	exit(0);
+	ft_printf("Use \"exit\" to leave the shell\n" MSH_PROMPT);
 }
 
 int			main(int argc, char *const *argv, char *const *envp)
 {
-	struct sigaction act;
-
-	if (signal(SIGINT, &handle_sigint))
+	if (signal(SIGINT, &handle_nothing))
 		ft_terminate("Error occured while setting a signal handler", 2);
 	copy_to_environ(envp);
 	msh_loop();

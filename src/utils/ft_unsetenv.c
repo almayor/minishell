@@ -18,8 +18,6 @@ int		ft_unsetenv(const char *name)
 	size_t	j;
 	char	**env;
 
-	if (ft_strcmp(ft_getenv(name), "") == 0)
-		return (0);
 	env = ft_xcalloc(sizeof(char *), ft_tablen(g_environ));
 	i = 0;
 	j = 0;

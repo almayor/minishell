@@ -14,6 +14,13 @@
 
 int 		msh_echo(char *const *argv)
 {
-	ft_printf("%s\n", argv[1] ? argv[1] : "");
+	size_t i;
+
+	i = 1;
+	while (argv[i])
+	{
+		ft_printf("%s%c", argv[i], argv[i + 1] ? ' ' : '\n');
+		i++;
+	}
 	return (1);
 }

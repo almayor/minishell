@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 19:23:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 02:09:27 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 03:44:05 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,6 @@ static char		**tokenize(char *line)
 		token = ft_strtok_r(NULL, MSH_TOK_DELIM, &ptr);
 	}
 	return (tokens);
-}
-
-static char		*msh_readline(const char *prompt)
-{
-	char	*line;
-	int		rc;
-
-	ft_putstr(prompt);
-	rc = get_next_line(0, &line);
-	if (rc < 0)
-		ft_terminate("failed to read a line", 2);
-	if (rc == 0)
-		return (NULL);
-	else
-		return (line);
 }
 
 void			msh_loop(void)

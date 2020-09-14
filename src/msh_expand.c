@@ -6,13 +6,13 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:46:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 21:12:01 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 03:49:26 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*expand_tilde(const char *s)
+static const char	*expand_tilde(const char *s)
 {
 	static char	buf[MSH_TOK_BUFSIZE];
 
@@ -24,7 +24,7 @@ static char	*expand_tilde(const char *s)
 		ft_strlcat(buf, s + 1, MSH_TOK_BUFSIZE);
 	}
 	else
-		ft_strcpy(buf, s);
+		return (s);
 	return (buf);
 }
 
@@ -41,7 +41,7 @@ static char	*extract_variable(const char *s)
 	return (var);
 }
 
-static char	*expand_parameters(const char *s)
+static const char	*expand_parameters(const char *s)
 {
 	static char	buf[MSH_TOK_BUFSIZE];
 	const char	*start;
@@ -63,10 +63,26 @@ static char	*expand_parameters(const char *s)
 	return (buf);
 }
 
+static const char	*remove_quotes(const char *s)
+{
+	static char	buf[MSH_TOK_BUFSIZE];
+	size_t		len;
+	size_t		i;
+
+	len = ft_strlen(s);
+	if (s[0] == '"' && s[len - 1] == '"')
+		return (ft_strncpy(buf, s + 1, len - 2));
+	if (s[0] == '\'' && s[len - 1] == '\'')
+		return (ft_strncpy(buf, s + 1, len - 2));
+	else
+		return (s);
+}
+
 char		*msh_expand(const char *s)
 {
 	char	*s1;
 
+	s = remove_quotes(s);
 	s = expand_tilde(s);
 	s = expand_parameters(s);
 	if (!(s1 = ft_strdup(s)))

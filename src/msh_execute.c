@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 00:41:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 23:23:59 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 04:11:36 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ static int	msh_launch(char *const *argv)
 {
 	static char	exec[PATH_MAX];
 
-	g_pid = fork();
-	if (g_pid < 0)
+	g_pid_child = fork();
+	if (g_pid_child < 0)
 		ft_terminate(MSH_ERR_FORK, 1);
-	else if (g_pid == 0)
+	else if (g_pid_child == 0)
 	{
 		if (!locate_exec(argv[0], exec))
 			ft_terminate(MSH_ERR_CMD, 1);
@@ -90,7 +90,7 @@ static int	msh_launch(char *const *argv)
 	}
 	else
 		wait(NULL);
-	g_pid = 0;
+	g_pid_child = 0;
 	return (1);
 }
 

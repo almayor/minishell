@@ -6,14 +6,14 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 01:04:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 00:51:54 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 04:12:20 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 char	**g_environ;
-int		g_pid;
+int		g_pid_child;
 
 static void	copy_to_environ(char *const *envp)
 {

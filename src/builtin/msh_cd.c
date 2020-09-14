@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:59:33 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 02:18:14 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 04:18:26 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int			msh_cd(char *const *argv)
 	char		*dir;
 	char		*pwd;
 
-	if (!(dir = argv[1]) && !(dir = ft_getenv("HOME")))
+	dir = argv[1];
+	if (dir == NULL && !(dir = ft_getenv("HOME")))
 		ft_error("cd: HOME not set");
 	else if (ft_strcmp(dir, "-") == 0 && !(dir = ft_getenv("OLDPWD")))
 		ft_error("cd: OLDPWD not set");

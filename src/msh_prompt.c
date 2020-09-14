@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 20:51:05 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 01:56:04 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 04:17:04 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ const char	*msh_prompt(void)
 	static char		pwd[PATH_MAX];
 	struct passwd	*pws;
 
-    pws = getpwuid(geteuid());
+	pws = getpwuid(geteuid());
 	getcwd(pwd, PATH_MAX);
 	ft_snprintf(prompt, MSH_PROMPT_BUFSIZE,
 		"%s%s %s%s %s%s %s%s%s ",

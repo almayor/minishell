@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:46:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 03:49:26 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/14 04:18:59 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static const char	*expand_tilde(const char *s)
 	return (buf);
 }
 
-static char	*extract_variable(const char *s)
+static char			*extract_variable(const char *s)
 {
 	size_t	i;
 	char	*var;
@@ -78,7 +78,7 @@ static const char	*remove_quotes(const char *s)
 		return (s);
 }
 
-char		*msh_expand(const char *s)
+char				*msh_expand(const char *s)
 {
 	char	*s1;
 

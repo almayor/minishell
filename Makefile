@@ -6,7 +6,7 @@
 #    By: unite <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/05 18:17:42 by unite             #+#    #+#              #
-#    Updated: 2020/09/14 01:26:52 by unite            ###   ########.fr        #
+#    Updated: 2020/09/18 04:37:30 by unite            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,11 @@ LFLAGS += -lftprintfgnl -L libftprintfgnl -lreadline
 
 ifeq ($(DEBUG), 1) 
 	COMPILE += -g
+endif
+
+ifeq ($(PROFILE), 1)
+	COMPILE += -pg
+	LINK += -pg
 endif
 
 ################################################################################

@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 19:23:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 04:10:59 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/18 17:36:49 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void			msh_loop(void)
 	while (status && (line = msh_readline(msh_prompt())))
 	{
 		cmd = ft_strtok_r(line, ";", &ptr);
-		while (cmd)
+		while (cmd && status)
 		{
 			argv = tokenize(cmd);
 			status = msh_execute(argv);

@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:46:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 04:18:59 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/18 17:50:34 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ static const char	*remove_quotes(const char *s)
 	size_t		i;
 
 	len = ft_strlen(s);
-	if (s[0] == '"' && s[len - 1] == '"')
+	if (len > 1 && s[0] == '"' && s[len - 1] == '"')
 		return (ft_strncpy(buf, s + 1, len - 2));
-	if (s[0] == '\'' && s[len - 1] == '\'')
+	if (len > 1 && s[0] == '\'' && s[len - 1] == '\'')
 		return (ft_strncpy(buf, s + 1, len - 2));
 	else
 		return (s);

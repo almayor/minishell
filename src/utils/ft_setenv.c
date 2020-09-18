@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:16:04 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 01:00:39 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/18 04:00:17 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	*get_string(const char *name, const char *value)
 {
 	char	*s;
 
-	if (ft_asprintf(&s, "%s=%s", name, value) < 0)
+	if (ft_asprintf(&s, "%s=%s", name, value ? value : "") < 0)
 		ft_terminate("bla", 2);
 	return (s);
 }

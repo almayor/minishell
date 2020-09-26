@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/13 20:51:05 by unite             #+#    #+#             */
-/*   Updated: 2020/09/18 04:30:02 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/27 00:00:51 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ const char	*msh_prompt(void)
 	dirname = ft_strrchr(pwd, '/') ? ft_strrchr(pwd, '/') + 1 : pwd;
 	ft_snprintf(prompt, MSH_PROMPT_BUFSIZE,
 		"%s%s %s%s %s%s %s%s%s ",
-		ANSI_BGRN, pws->pw_name,
-		ANSI_BLU, "::",
-		ANSI_BMAG, *dirname ? dirname : "/",
-		ANSI_BLU, "$>", ANSI_RESET);
+		"", pws->pw_name,
+		"", "::",
+		"", *dirname ? dirname : "/",
+		"", "$>", "");
 	return (prompt);
 }

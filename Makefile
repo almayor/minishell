@@ -6,7 +6,7 @@
 #    By: unite <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/05 18:17:42 by unite             #+#    #+#              #
-#    Updated: 2020/09/26 22:41:03 by unite            ###   ########.fr        #
+#    Updated: 2020/09/27 00:01:20 by unite            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,6 @@ msh_prompt.c \
 msh_signal.c \
 msh_statement.c \
 msh_cleanup.c \
-msh_readline.c \
 main.c \
 
 ################################################################################
@@ -62,7 +61,7 @@ CFLAGS += -MMD
 CFLAGS += $(foreach path, $(PATHI), -I$(path))
 
 LINK = $(CC)
-LFLAGS += -lftprintfgnl -L libftprintfgnl
+LFLAGS += -lreadline -lftprintfgnl -L libftprintfgnl
 
 ################################################################################
 

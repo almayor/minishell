@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 21:09:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/26 20:38:01 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/27 00:01:10 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # define MINISHELL_H
 
 # include <limits.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -49,7 +51,6 @@ int			msh_execute(char *const *argv);
 char		*msh_expand(const char *s);
 void		msh_loop(void);
 const char	*msh_prompt(void);
-char		*msh_readline(const char *prompt);
 int			msh_statement(const char *statement);
 void		msh_cleanup(void);
 

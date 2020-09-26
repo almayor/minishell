@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 01:04:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/26 20:41:21 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/26 23:50:00 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static void	parse_arguments(int argc, char *const *argv)
 	i = 0;
 	while (i < argc)
 	{
-		if (ft_strcmp(argv[i], "-c") == 0 && i == argc - 1)
+		if (ft_strcmp(argv[i], "-d") == 0)
+			rl_bind_key('\t', rl_insert);
+		else if (ft_strcmp(argv[i], "-c") == 0 && i == argc - 1)
 			ft_terminate("-c option requires an argument", 1);
 		else if (ft_strcmp(argv[i], "-c") == 0)
 		{

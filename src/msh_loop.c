@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/11 19:23:20 by unite             #+#    #+#             */
-/*   Updated: 2020/09/26 20:53:43 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/26 23:49:48 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void			msh_loop(void)
 	char	*line;
 	int		status;
 
-	while ((line = msh_readline(msh_prompt())))
+	while ((line = readline(msh_prompt())))
 	{
+		add_history(line);
 		status = msh_statement(line);
 		free(line);
 		if (status == 0)

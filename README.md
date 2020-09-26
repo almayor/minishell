@@ -36,6 +36,7 @@ cd minishell
 git submodule --init --recursive
 make
 ```
+You can run unit tests with `make test`
 
 ## Resources
 

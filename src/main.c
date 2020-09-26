@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 01:04:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/26 23:50:00 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/27 00:08:33 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ static void	parse_arguments(int argc, char *const *argv)
 	i = 0;
 	while (i < argc)
 	{
+		if (ft_strcmp(argv[i], "-h") == 0 || ft_strcmp(argv[i], "--help") == 0)
+			ft_terminate("options\n"
+						"-h Display help\n"
+						"-d Disable TAB autocompletion\n"
+						"-c <command> Read commands from a string", 0);
 		if (ft_strcmp(argv[i], "-d") == 0)
 			rl_bind_key('\t', rl_insert);
 		else if (ft_strcmp(argv[i], "-c") == 0 && i == argc - 1)

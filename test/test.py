@@ -173,6 +173,14 @@ def prepare_tests():
 	suite.add(Test('setenv a b c', err="msh: setenv: too many arguments"))
 	suite.add(Test("setenv PATH /bin:/usr/bin", "", ""))
 
+	suite = Suite("variable expansion")
+	suite.add(Test('setenv FOO bar; echo $FOO', out="bar"));
+	suite.add(Test('setenv FOO bar; echo blabla-$FOO/hello', out="blabla-bar/hello"));
+	suite.add(Test('echo $HOME', out=os.getenv("HOME")));
+	suite.add(Test('echo ~', out=os.getenv("HOME")));
+	suite.add(Test('echo ~/hello', out=f'{os.getenv("HOME")}/hello'));
+	suite.add(Test('setenv FOO bar; echo ~/$FOO', out=f'{os.getenv("HOME")}/bar'));
+
 	suite = Suite("PATH management")
 	suite.add(CompareTest('unsetenv PATH ; setenv PATH "/bin:/usr/bin" ; ls', '"PATH=/bin:/usr/bin" ls'))
 	suite.add(Test('unsetenv PATH ; ls', err="msh: command not found"))

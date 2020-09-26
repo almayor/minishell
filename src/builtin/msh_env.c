@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 23:58:32 by unite             #+#    #+#             */
-/*   Updated: 2020/09/13 16:37:45 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/26 22:35:16 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int		msh_env(char *const *argv)
 {
 	size_t	i;
 
+	if (ft_tablen(argv) > 1)
+	{
+		ft_error("env: too many arguments");
+		return (1);
+	}
 	i = 0;
 	while (g_environ[i])
 	{

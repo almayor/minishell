@@ -6,13 +6,13 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 04:22:56 by unite             #+#    #+#             */
-/*   Updated: 2020/09/18 18:35:35 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/26 22:35:22 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_alnum_str(const char *s)
+static int	is_valid_str(const char *s)
 {
 	size_t	i;
 
@@ -30,7 +30,9 @@ int			msh_setenv(char *const *argv)
 {
 	if (argv[1] == NULL)
 		ft_error("setenv: variable name not specified");
-	else if (!is_alnum_str(argv[1]))
+	else if (ft_tablen(argv) > 3)
+		ft_error("setenv: too many arguments");
+	else if (!is_valid_str(argv[1]))
 		ft_error("setenv: variable name must contain alphanumeric characters");
 	else
 		ft_setenv(argv[1], argv[2], 1);

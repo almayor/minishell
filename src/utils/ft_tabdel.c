@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_unsetenv.c                                     :+:      :+:    :+:   */
+/*   ft_tabdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/12 04:40:49 by unite             #+#    #+#             */
-/*   Updated: 2020/09/26 22:34:33 by unite            ###   ########.fr       */
+/*   Created: 2020/09/12 22:21:02 by unite             #+#    #+#             */
+/*   Updated: 2020/09/26 20:16:48 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	msh_unsetenv(char *const *argv)
+void	ft_tabdel(char **tab)
 {
-	if (ft_tablen(argv) != 2)
-		ft_error("unsetenv: too many arguments");
-	else if (argv[1] == NULL)
-		ft_error("unsetenv: variable name not specified");
-	else
-		ft_unsetenv(argv[1]);
-	return (1);
+	size_t i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 }

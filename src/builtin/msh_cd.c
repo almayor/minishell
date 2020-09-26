@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 03:59:33 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 04:18:26 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/26 22:34:08 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int			msh_cd(char *const *argv)
 	char		*pwd;
 
 	dir = argv[1];
-	if (dir == NULL && !(dir = ft_getenv("HOME")))
+	if (ft_tablen(argv) > 2)
+		ft_error("cd: too many arguments");
+	else if (dir == NULL && !(dir = ft_getenv("HOME")))
 		ft_error("cd: HOME not set");
 	else if (ft_strcmp(dir, "-") == 0 && !(dir = ft_getenv("OLDPWD")))
 		ft_error("cd: OLDPWD not set");

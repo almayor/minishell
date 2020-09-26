@@ -6,7 +6,7 @@
 #    By: unite <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/05 18:17:42 by unite             #+#    #+#              #
-#    Updated: 2020/09/18 04:37:30 by unite            ###   ########.fr        #
+#    Updated: 2020/09/26 22:41:03 by unite            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ utils/ft_getenv.c \
 utils/ft_setenv.c \
 utils/ft_strtok.c \
 utils/ft_strtok_r.c \
+utils/ft_tabdel.c \
 utils/ft_tablen.c \
 utils/ft_terminate.c \
 utils/ft_unsetenv.c \
@@ -34,6 +35,9 @@ msh_expand.c \
 msh_loop.c \
 msh_prompt.c \
 msh_signal.c \
+msh_statement.c \
+msh_cleanup.c \
+msh_readline.c \
 main.c \
 
 ################################################################################
@@ -58,7 +62,7 @@ CFLAGS += -MMD
 CFLAGS += $(foreach path, $(PATHI), -I$(path))
 
 LINK = $(CC)
-LFLAGS += -lftprintfgnl -L libftprintfgnl -lreadline
+LFLAGS += -lftprintfgnl -L libftprintfgnl
 
 ################################################################################
 
@@ -97,7 +101,7 @@ DEP += $(patsubst %.c, $(PATHO)/%.d, $(SRC_NAME))
 
 .DEFAULT_GOAL = all
 
-.PHONY : all clean fclean re libftprintfgnl
+.PHONY : all clean fclean re libftprintfgnl test
 
 all : libftprintfgnl $(NAME)
 
@@ -112,5 +116,9 @@ re : fclean all
 
 libftprintfgnl :
 	$(MAKE) -C $(PATHL)
+
+test : all
+	@echo "\n============TESTS============\n"
+	@python3 test/test.py
 
 ################################################################################

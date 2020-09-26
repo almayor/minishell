@@ -17,7 +17,7 @@ static char	*get_string(const char *name, const char *value)
 	char	*s;
 
 	if (ft_asprintf(&s, "%s=%s", name, value ? value : "") < 0)
-		ft_terminate("bla", 2);
+		ft_terminate(MSH_ERR_MALLOC, 2);
 	return (s);
 }
 

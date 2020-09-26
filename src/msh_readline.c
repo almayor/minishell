@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   msh_unsetenv.c                                     :+:      :+:    :+:   */
+/*   msh_readline.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/12 04:40:49 by unite             #+#    #+#             */
-/*   Updated: 2020/09/26 22:34:33 by unite            ###   ########.fr       */
+/*   Created: 2020/09/26 20:11:40 by unite             #+#    #+#             */
+/*   Updated: 2020/09/26 20:12:03 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	msh_unsetenv(char *const *argv)
+char	*msh_readline(const char *prompt)
 {
-	if (ft_tablen(argv) != 2)
-		ft_error("unsetenv: too many arguments");
-	else if (argv[1] == NULL)
-		ft_error("unsetenv: variable name not specified");
+	char	*line;
+	int		rc;
+
+	ft_putstr(prompt);
+	rc = get_next_line(0, &line);
+	if (rc < 0)
+		ft_terminate("failed to read a line", 2);
+	if (rc == 0)
+		return (NULL);
 	else
-		ft_unsetenv(argv[1]);
-	return (1);
+		return (line);
 }

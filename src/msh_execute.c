@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 00:41:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/18 18:32:27 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/26 19:40:17 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*locate_exec(const char *name, char *buf)
 		ft_strlcat(buf, name, PATH_MAX);
 		return (buf);
 	}
-	ft_strlcpy(path, ft_getenv("PATH"), PATH_MAX);
+	ft_strlcpy(path, ft_getenv("PATH") ? ft_getenv("PATH") : "", PATH_MAX);
 	dir = ft_strtok(path, ":");
 	while (dir != NULL)
 	{

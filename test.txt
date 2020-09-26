@@ -1,0 +1,15 @@
+[1;32muser [0;34m:: [1;35mminishell [0;34m$>[0m Here1
+CMakeLists.txt
+LICENSE
+Makefile
+README.md
+author
+cmake-build-debug
+docs
+include
+libftprintfgnl
+minishell
+obj
+src
+test.txt
+[1;32muser [0;34m:: [1;35mminishell [0;34m$>[0m 

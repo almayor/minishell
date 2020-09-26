@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 21:09:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/14 04:15:13 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/26 20:38:01 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ int			msh_execute(char *const *argv);
 char		*msh_expand(const char *s);
 void		msh_loop(void);
 const char	*msh_prompt(void);
+char		*msh_readline(const char *prompt);
+int			msh_statement(const char *statement);
+void		msh_cleanup(void);
 
 /*
 ** signal handlers
@@ -77,6 +80,7 @@ char		*ft_getenv(const char *name);
 int			ft_setenv(const char *name, const char *value, int overwrite);
 char		*ft_strtok(char *str, const char *sep);
 char		*ft_strtok_r(char *str, const char *sep, char **lasts);
+void		ft_tabdel(char **tab);
 size_t		ft_tablen(char *const *tab);
 void		ft_terminate(const char *mes, int rc);
 int			ft_unsetenv(const char *name);

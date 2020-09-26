@@ -6,7 +6,7 @@
 /*   By: unite <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/12 01:04:23 by unite             #+#    #+#             */
-/*   Updated: 2020/09/18 18:29:53 by unite            ###   ########.fr       */
+/*   Updated: 2020/09/26 20:41:21 by unite            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,28 @@ static void	init_environ(void)
 	static char	shlvl[10];
 	int			shlvl_d;
 
-	shlvl_d = ft_atoi(ft_getenv("SHLVL"));
+	shlvl_d = ft_getenv("SHLVL") ? ft_atoi(ft_getenv("SHLVL")) : 1;
 	ft_sprintf(shlvl, "%i", shlvl_d < 0 || shlvl_d > 99 ? 1 : shlvl_d + 1);
 	ft_setenv("SHLVL", shlvl, 1);
 }
 
-static void	free_environ(void)
+static void	parse_arguments(int argc, char *const *argv)
 {
 	size_t	i;
 
 	i = 0;
-	while (g_environ[i])
-		free(g_environ[i++]);
-	free(g_environ);
+	while (i < argc)
+	{
+		if (ft_strcmp(argv[i], "-c") == 0 && i == argc - 1)
+			ft_terminate("-c option requires an argument", 1);
+		else if (ft_strcmp(argv[i], "-c") == 0)
+		{
+			msh_statement(argv[++i]);
+			msh_cleanup();
+			exit(0);
+		}
+		i++;
+	}
 }
 
 int			main(int argc, char *const *argv, char *const *envp)
@@ -56,6 +65,7 @@ int			main(int argc, char *const *argv, char *const *envp)
 		ft_terminate(MSH_ERR_SIGHNDL, 2);
 	copy_to_environ(envp);
 	init_environ();
+	parse_arguments(argc, argv);
 	msh_loop();
-	free_environ();
+	msh_cleanup();
 }

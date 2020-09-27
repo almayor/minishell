@@ -5,6 +5,7 @@ import os
 import subprocess
 import sys
 
+
 class Test:
 
 	def __init__(self, cmd, out="", err=""):
@@ -28,10 +29,12 @@ class Test:
 		p.stdin.close()
 		p.wait()
 
+		self.returncode = p.returncode
 		self.actual_out = p.stdout.read().decode()
 		self.actual_err = p.stderr.read().decode()
 		
 		return (
+			self.returncode == 0 and
 			self.actual_out == self.expected_out and
 			self.actual_err == self.expected_err
 		)
@@ -39,10 +42,12 @@ class Test:
 	@property
 	def trace(self):
 		return (
-			f"    {self.cmd}\n"
+			f"    > {self.cmd}\n"
+			f"    returned {self.returncode}\n"
 			f"    stdout: {repr(self.actual_out):9s} (expected {repr(self.expected_out)})\n"
 			f"    stderr: {repr(self.actual_err):9s} (expected {repr(self.expected_err)})\n\n"
 		)
+
 
 class CompareTest(Test):
 
@@ -68,6 +73,7 @@ class CompareTest(Test):
 		self.expected_out = p.stdout.read().decode()
 		self.expected_err = p.stderr.read().decode()
 
+
 class CustomTest(Test):
 
 	def __init__(self, cmd, fun):
@@ -76,16 +82,21 @@ class CustomTest(Test):
 
 	def run(self):
 		super().run()
-		return self.fun(self.actual_out, self.actual_err)
+		return (
+			self.returncode == 0 and
+			self.fun(self.actual_out, self.actual_err)
+		)
 
 	@property
 	def trace(self):
 		return (
-			f"    {self.cmd}\n"
+			f"    > {self.cmd}\n"
+			f"    returned {self.returncode}\n"
 			f"    stdout: {repr(self.actual_out):9s}\n"
 			f"    stderr: {repr(self.actual_err):9s}\n"
 			f"    function: {inspect.getsource(self.fun)}\n\n"
 		)
+	
 
 class Suite:
 	
@@ -135,6 +146,7 @@ class Suite:
 		cls.suites = list()
 		return nfail == 0
 
+
 def prepare_tests():
 
 	suite = Suite("fork and execve")
@@ -153,6 +165,7 @@ def prepare_tests():
 	suite.add(Test('exit', out="", err=""))
 	suite.add(Test('echo It works', out="It works"))
 	suite.add(Test('echo "Hello"', out="Hello"))
+	suite.add(Test('echo "', out='"'))
 	suite.add(Test('cd /usr/bin ; /bin/pwd', out='/usr/bin'))
 	suite.add(Test('cd /usr ; cd bin ; /bin/pwd', out='/usr/bin'))
 	suite.add(Test('cd ; /bin/pwd', out=os.getenv("HOME")))
@@ -185,6 +198,7 @@ def prepare_tests():
 	suite.add(CompareTest('unsetenv PATH ; setenv PATH "/bin:/usr/bin" ; ls', '"PATH=/bin:/usr/bin" ls'))
 	suite.add(Test('unsetenv PATH ; ls', err="msh: command not found"))
 	suite.add(CompareTest('unsetenv PATH ; /bin/ls', "ls"))
+
 
 if __name__ == "__main__":
 	if len(sys.argv) == 2:
